@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expense-tracker-backend-prod
+spec:
+  selector:
+    matchLabels:
+      app: expense-tracker-backend-prod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: expense-tracker-backend-prod
+    spec:
+      containers:
+      - name: expense-tracker-backend-prod
+        image: ghcr.io/pvico12/expense-tracker-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URI
+          valueFrom:
+            secretKeyRef:
+              name: db-access
+              key: PROD_URL
+        - name: JWT_ACCESS_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-token-secrets
+              key: JWT_ACCESS_TOKEN_SECRET
+        - name: JWT_REFRESH_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-token-secrets
+              key: JWT_REFRESH_TOKEN_SECRET
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: expense-tracker-gcp.json
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-api-key
+              key: OPENAI_API_KEY
+        volumeMounts:
+        - name: gcp-vision-api-service-account-config
+          mountPath: /app/expense-tracker-gcp.json
+          subPath: expense-tracker-gcp.json
+        - name: gcp-firebase-service-account-config
+          mountPath: /app/expense-tracker-firebase.json
+          subPath: expense-tracker-firebase.json
+      volumes:
+      - name: gcp-vision-api-service-account-config
+        configMap:
+          name: gcp-vision-api-service-account-config
+      - name: gcp-firebase-service-account-config
+        configMap:
+          name: gcp-firebase-service-account-config
+      imagePullSecrets:
+      - name: ghcr-creds-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expense-tracker-backend-prod
+spec:
+  selector:
+    app: expense-tracker-backend-prod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
