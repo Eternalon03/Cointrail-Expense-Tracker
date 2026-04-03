@@ -3,6 +3,8 @@
 Frontend: Kotlin (Jetpack Compose)
 Backend: Python (FastAPI)
 
+Group Project with 6 members from my final semester
+
 ## Project Description
 
 The **Expense Tracker** mobile app is designed to help users efficiently manage their personal finances. With this app, users can:
