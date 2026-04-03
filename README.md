@@ -1,5 +1,7 @@
 # Expense Tracker
 
+[![Watch the video]([https://youtube.com](https://www.youtube.com/watch?v=dfk_-6fy-4o))]([https://youtube.com](https://www.youtube.com/watch?v=dfk_-6fy-4o))
+
 Team Name: The Debuggers
 Team Number: 10
 
