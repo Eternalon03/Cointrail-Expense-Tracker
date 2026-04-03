@@ -1,5 +1,8 @@
 # Expense Tracker
 
+Team Name: The Debuggers
+Team Number: 10
+
 Frontend: Kotlin (Jetpack Compose)
 Backend: Python (FastAPI)
 
