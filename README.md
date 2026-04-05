@@ -3,7 +3,7 @@
 
 https://github.com/user-attachments/assets/b23169c4-5801-4368-a3e4-6f79186661c6
 
-
+#### Full Report and Archiectural Diagrams: https://drive.google.com/file/d/1nVJPZYjqlmpE56ew1s7WABRY6_e1L76B/view?usp=sharing
 Team Name: The Debuggers
 Team Number: 10
 
